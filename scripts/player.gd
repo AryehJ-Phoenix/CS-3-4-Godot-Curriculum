@@ -83,3 +83,10 @@ func die():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit(0)
+
+
+func _on_hurt_box_body_entered(body: Node2D) -> void:
+	#print("soemthing")
+	#if body:
+		#print("hit!")
+	pass
