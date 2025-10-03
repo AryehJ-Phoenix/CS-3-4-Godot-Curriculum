@@ -5,7 +5,7 @@ class_name Player
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var move_speed: float = 200.0
-@export var maxHealth : int = 10
+@export var maxHealth : int = 100
 @export var health : int = maxHealth
 @export var coins : int = 0
 
@@ -83,10 +83,3 @@ func die():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit(0)
-
-
-func _on_hurt_box_body_entered(body: Node2D) -> void:
-	#print("soemthing")
-	#if body:
-		#print("hit!")
-	pass

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://clkh0aurm6cru"]
 
-[ext_resource type="Script" path="res://scripts/spike.gd" id="1_h46uk"]
+[ext_resource type="Script" uid="uid://6sk823fmmntx" path="res://scripts/spike.gd" id="1_h46uk"]
 [ext_resource type="Texture2D" uid="uid://r4i5vx01mf1n" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_1.png" id="2_q32dk"]
 [ext_resource type="Texture2D" uid="uid://cc0thdm6n3t3y" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_2.png" id="3_pnn4v"]
 [ext_resource type="Texture2D" uid="uid://de5tc4hisbwlh" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_3.png" id="4_4culv"]

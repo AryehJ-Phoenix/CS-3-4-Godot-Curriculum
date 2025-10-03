@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cqvpxnx2pwqhk"]
+[gd_scene load_steps=40 format=3 uid="uid://cqvpxnx2pwqhk"]
 
 [ext_resource type="Script" uid="uid://dbc6krbwjvop0" path="res://scripts/player.gd" id="1_4x8vn"]
 [ext_resource type="Texture2D" uid="uid://c1j65egvfiye4" path="res://assets/lpc_male_animations_2025-09-04T20-28-14/standard/idle.png" id="2_wn8rh"]
@@ -272,9 +272,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(20, 22)
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4x8vn")
 
@@ -292,12 +289,3 @@ autoplay = "idle_forward"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("4_dqkch")
-
-[node name="Hurt Box" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurt Box"]
-position = Vector2(-1.5, 14)
-shape = SubResource("RectangleShape2D_dqkch")
-debug_color = Color(1, 0, 0, 0.41960785)
-
-[connection signal="body_entered" from="Hurt Box" to="." method="_on_hurt_box_body_entered"]

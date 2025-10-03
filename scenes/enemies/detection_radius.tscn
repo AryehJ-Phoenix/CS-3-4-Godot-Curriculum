@@ -7,4 +7,5 @@ radius = 39.012817
 
 [node name="Detection Radius" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
+scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_15j45")
