@@ -16,8 +16,6 @@ class_name npc
 @export var target : Vector2
 @export var damage: int = -20
 
-var damage_cooldown: float = 0.5
-var can_damage: bool = true
 var direction = null
 
 func _ready() -> void:
@@ -31,13 +29,11 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_detection_radius_body_entered(_body: Node2D) -> void:
-	if _body == player:
-		is_hostile = true
+	pass
 
 
 func _on_detection_radius_body_exited(_body: Node2D) -> void:
-	if _body == player:
-		is_hostile = false
+	pass
 
 
 
@@ -54,15 +50,3 @@ func movement(_delta):
 	velocity = speed * direction
 	
 	pass
-
-
-func _on_hurt_box_body_entered(body: Node2D) -> void:
-	if body == player and can_damage:
-		if player.has_method("change_health"):
-			player.change_health(damage)
-		
-		can_damage = false
-		get_tree().create_timer(damage_cooldown).timeout.connect(_reset_damage_cooldown)
-
-func _reset_damage_cooldown():
-	can_damage = true

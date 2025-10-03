@@ -9,7 +9,8 @@ class_name Player
 @export var health : int = maxHealth
 @export var coins : int = 0
 
-
+var knockback: Vector2 = Vector2.ZERO
+var knockback_cooldown: float = 0.0
 var facing: Vector2 = Vector2.ZERO
 
 
@@ -18,7 +19,14 @@ func _ready():
 	# TODO: Add detailed character info display (Lesson 1)
 
 func _physics_process(delta):
-	handle_movement()
+	if knockback_cooldown > 0.0:
+		velocity = knockback
+		knockback_cooldown -= delta
+		if knockback_cooldown <= 0.0:
+			knockback = Vector2.ZERO
+	else:
+		handle_movement()
+	move_and_slide()
 
 func handle_movement():
 	# Get input direction from arrow keys
@@ -33,7 +41,6 @@ func handle_movement():
 	
 	# Apply movement using Godot's built-in physics
 	velocity = direction * move_speed
-	move_and_slide()
 
 # BAD QUICK CODE MAYBE CHANGE
 func handle_sprite(direction: Vector2) -> void:
@@ -83,3 +90,7 @@ func die():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit(0)
+
+func apply_knockback(direction: Vector2, strength: float, duration: float) -> void:
+	knockback = direction * strength
+	knockback_cooldown = duration
