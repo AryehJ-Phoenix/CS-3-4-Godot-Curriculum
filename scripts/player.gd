@@ -12,7 +12,7 @@ class_name Player
 var knockback: Vector2 = Vector2.ZERO
 var knockback_cooldown: float = 0.0
 var facing: Vector2 = Vector2.ZERO
-
+var gotten: bool = false
 
 func _ready():
 	print("Player is ready!")

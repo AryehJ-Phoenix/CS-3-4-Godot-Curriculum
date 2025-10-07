@@ -1,9 +1,11 @@
 extends Area2D
 class_name Spike
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 # Damage properties
 @export var damage_amount: int = -25
-@export var damage_cooldown: float = 1.0
+@export var damage_cooldown: float = 2.0
 
 # Internal tracking
 var can_damage: bool = true
@@ -21,10 +23,7 @@ func _on_body_entered(body):
 		if body.has_method("change_health"):
 			body.change_health(damage_amount)
 		
-		
-		# Play the animation of the spikes resetting
-		$AnimatedSprite2D.stop()
-		$AnimatedSprite2D.play()
+		sprite.play("show")
 		
 		# Start cooldown to prevent spam damage
 		can_damage = false
@@ -32,4 +31,5 @@ func _on_body_entered(body):
 
 func _reset_damage_cooldown():
 	can_damage = true
+	sprite.play("hide")
 	print("Spike is ready to damage again")

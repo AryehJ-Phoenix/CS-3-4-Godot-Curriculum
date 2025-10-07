@@ -10,6 +10,23 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_q32dk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pnn4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ir2l3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4culv")
+}],
+"loop": false,
+"name": &"hide",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_4culv")
 }, {
 "duration": 1.0,
@@ -22,7 +39,15 @@ animations = [{
 "texture": ExtResource("2_q32dk")
 }],
 "loop": false,
-"name": &"default",
+"name": &"show",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4culv")
+}],
+"loop": true,
+"name": &"wait",
 "speed": 5.0
 }]
 
@@ -34,7 +59,8 @@ script = ExtResource("1_h46uk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6yjvv")
-frame = 3
+animation = &"show"
+autoplay = "wait"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5o5ef")

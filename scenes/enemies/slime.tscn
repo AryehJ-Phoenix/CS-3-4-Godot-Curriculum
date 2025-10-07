@@ -77,3 +77,4 @@ shape = SubResource("RectangleShape2D_4h4y0")
 [connection signal="body_entered" from="Detection Radius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="Detection Radius" to="." method="_on_detection_radius_body_exited"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]

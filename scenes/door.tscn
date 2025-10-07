@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8mf4562xlcu8"]
+[gd_scene load_steps=17 format=3 uid="uid://c8mf4562xlcu8"]
 
 [ext_resource type="Script" uid="uid://bvenu0ll76s8p" path="res://scripts/door.gd" id="1_hpvv5"]
 [ext_resource type="Texture2D" uid="uid://kj17m5wnf01g" path="res://assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="2_uvdjg"]
@@ -87,6 +87,9 @@ size = Vector2(16, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uvdjg"]
 polygon = PackedVector2Array(8, -4, 8, -8, -8, -8, -8, -4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83dcw"]
+size = Vector2(18, 18)
+
 [node name="Door" type="AnimatableBody2D"]
 script = ExtResource("1_hpvv5")
 
@@ -98,3 +101,10 @@ shape = SubResource("RectangleShape2D_uvdjg")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_uvdjg")
+
+[node name="Open" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Open"]
+shape = SubResource("RectangleShape2D_83dcw")
+
+[connection signal="body_entered" from="Open" to="." method="_on_open_body_entered"]
