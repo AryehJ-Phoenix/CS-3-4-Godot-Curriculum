@@ -1,10 +1,7 @@
-extends Node
-
-var gotten = false
-
+extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.gotten = true
+		body.keys += 1
 		queue_free()

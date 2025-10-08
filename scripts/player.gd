@@ -12,7 +12,7 @@ class_name Player
 var knockback: Vector2 = Vector2.ZERO
 var knockback_cooldown: float = 0.0
 var facing: Vector2 = Vector2.ZERO
-var gotten: bool = false
+var keys: int = 0
 
 func _ready():
 	print("Player is ready!")
@@ -27,6 +27,9 @@ func _physics_process(delta):
 	else:
 		handle_movement()
 	move_and_slide()
+	
+	if health <= 0:
+		Global.game_world.respawn()
 
 func handle_movement():
 	# Get input direction from arrow keys

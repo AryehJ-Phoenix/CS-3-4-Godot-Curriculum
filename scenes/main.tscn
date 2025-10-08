@@ -60,10 +60,10 @@ position = Vector2(-204.5, -56.5)
 
 [node name="HealthPotion" parent="Tilemap/StuffOnTop" instance=ExtResource("6_tefeu")]
 position = Vector2(18, 17.5)
-amount = 5
 
 [node name="Coin" parent="Tilemap/StuffOnTop" instance=ExtResource("5_tbgi4")]
 position = Vector2(-9.5, 26)
+color = Color(1, 0.482, 0.18, 1)
 
 [node name="Door" parent="Tilemap/StuffOnTop" instance=ExtResource("7_tipki")]
 position = Vector2(24, -24)
@@ -73,6 +73,15 @@ position = Vector2(-183.5, 105)
 
 [node name="Chest" parent="Tilemap/StuffOnTop" instance=ExtResource("6_tipki")]
 position = Vector2(150, 29)
+spread = 40
+
+[node name="Key" parent="Tilemap/StuffOnTop" instance=ExtResource("12_eb6dy")]
+position = Vector2(-200, 36.25)
+scale = Vector2(0.5, 0.5)
+
+[node name="Key2" parent="Tilemap/StuffOnTop" instance=ExtResource("12_eb6dy")]
+position = Vector2(-10.5, -161.5)
+scale = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." instance=ExtResource("1_2j8vx")]
 unique_name_in_owner = true
@@ -88,8 +97,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="slime" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(-496, 36)
-move_points = Array[Vector2]([Vector2(-470, 125), Vector2(-325, 125), Vector2(-325, -20), Vector2(-470, -20)])
-
-[node name="Key" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(-327, 35)
+position = Vector2(-475, 15)
+move_points = Array[Vector2]([Vector2(-475, 125), Vector2(-325, 125), Vector2(-325, -20), Vector2(-475, -20)])

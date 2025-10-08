@@ -6,21 +6,20 @@ extends Area2D
 class_name pickup
 
 @export var color: Color
-@export var amount : int = 1
 @export var type : String = ""
 @export var label : String = ""
 @export var auto_pickup : bool = true
 var collected: bool = false
+var amount : int = 1
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	# Set the color of the pickup
-	if $AnimatedSprite2D.material != null:
-		$AnimatedSprite2D.material.set_shader_parameter("color", color)
 	configure_pickup(type, label)
 
 func _process(delta: float) -> void:
-	
+	if $AnimatedSprite2D.material != null:
+		$AnimatedSprite2D.material.set_shader_parameter("color", color)
 	pass
 
 func _on_body_entered(body):
@@ -40,12 +39,15 @@ func configure_pickup(_type : String, _label : String) -> bool:
 	if _type == "coin":
 		if _label == "copper":
 			amount = 1
+			color = Color(1.0, 0.482, 0.18, 1.0)
 			return true
 		elif _label == "silver":
 			amount = 5
+			color = Color(0.647, 0.663, 0.706, 1.0)
 			return true
 		elif _label == "gold":
 			amount = 10
+			color = Color(0.898, 0.722, 0.043, 1.0)
 			return true
 		else: return false
 	elif _type == "health_potion":
