@@ -4,6 +4,7 @@ extends Area2D
 @export var spread: int = 50
 @export var silver_chance: int = 20
 @export var gold_chance: int = 10
+@export var particles: Node2D
 var coin = preload("res://scenes/coin.tscn")
 var rng = RandomNumberGenerator.new()
 
@@ -20,6 +21,8 @@ func _on_body_entered(body: Node2D) -> void:
 			$AnimatedSprite2D.play()
 			collision_mask = 100
 			summon_coins(rng.randi_range(5,10))
+			particles.global_position = global_position
+			particles.explode()
 		else:
 			print("chest requires key")
 
