@@ -52,7 +52,7 @@ func configure_pickup(_type : String, _label : String) -> bool:
 		else: return false
 	elif _type == "health_potion":
 		if _label == "small":
-			amount = 5
+			amount = 20
 			return true
 		elif _label == "large":
 			amount = 100

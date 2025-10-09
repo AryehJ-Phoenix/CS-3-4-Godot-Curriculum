@@ -1,10 +1,18 @@
 extends Area2D
 
+@export var child: AnimatableBody2D = null
+var speed: int
+var flipped: bool = false
 
-func play_animation(reverse: bool = false) -> void:
-	var speed: int
-	if reverse:
+
+func _on_body_entered(body: Node2D) -> void:
+	if flipped == true:
 		speed = -1
-	else:
+		flipped = false
+	elif flipped == false:
 		speed = 1
-	$AnimatedSprite2D.play("", speed, reverse)
+		flipped = trueaaaaaaaaaaaaa
+	print(speed)
+	if body is Player:
+		$AnimatedSprite2D.play("default",speed)
+		child.lever(speed)

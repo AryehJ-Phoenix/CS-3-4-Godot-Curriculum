@@ -68,8 +68,13 @@ color = Color(1, 0.482, 0.18, 1)
 [node name="Door" parent="Tilemap/StuffOnTop" instance=ExtResource("7_tipki")]
 position = Vector2(24, -24)
 
-[node name="Lever" parent="Tilemap/StuffOnTop" instance=ExtResource("8_85g3d")]
+[node name="Door2" parent="Tilemap/StuffOnTop" instance=ExtResource("7_tipki")]
+position = Vector2(24, -48)
+condition = "lever"
+
+[node name="Lever" parent="Tilemap/StuffOnTop" node_paths=PackedStringArray("child") instance=ExtResource("8_85g3d")]
 position = Vector2(-183.5, 105)
+child = NodePath("../Door2")
 
 [node name="Chest" parent="Tilemap/StuffOnTop" instance=ExtResource("6_tipki")]
 position = Vector2(150, 29)
