@@ -16,6 +16,7 @@ func respawn():
 	player.velocity = Vector2(0,0)
 	player.global_position = Vector2(0,0)
 	player.health = player.maxHealth
+	player.coins /= 2
 
 # TODO: Add game management methods here (Future lessons)
 # - spawn_enemy()

@@ -28,6 +28,16 @@ environment = SubResource("Environment_jyhfs")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.103743605, 0.103743516, 0.103743516, 1)
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Tilemap" type="Node2D" parent="."]
 scale = Vector2(2, 2)
 
@@ -79,11 +89,12 @@ position = Vector2(-183.5, 105)
 child = NodePath("../Door2")
 
 [node name="Chest" parent="Tilemap/StuffOnTop" node_paths=PackedStringArray("particles") instance=ExtResource("6_tipki")]
-position = Vector2(150, 29)
-spread = 40
+position = Vector2(180, 25)
 silver_chance = 30
 gold_chance = 20
 particles = NodePath("Chest Coin Particles")
+min_amount = 8
+max_amount = 12
 
 [node name="Chest Coin Particles" parent="Tilemap/StuffOnTop/Chest" instance=ExtResource("10_trceg")]
 position = Vector2(-150, -29)
@@ -102,13 +113,3 @@ unique_name_in_owner = true
 [node name="slime" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(-475, 15)
 move_points = Array[Vector2]([Vector2(-475, 125), Vector2(-325, 125), Vector2(-325, -20), Vector2(-475, -20)])
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

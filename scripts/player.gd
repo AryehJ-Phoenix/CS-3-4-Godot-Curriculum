@@ -28,8 +28,6 @@ func _physics_process(delta):
 		handle_movement()
 	move_and_slide()
 	
-	if health <= 0:
-		Global.game_world.respawn()
 
 func handle_movement():
 	# Get input direction from arrow keys
@@ -88,6 +86,7 @@ func change_health(_amount):
 	print("Health: " + str(health))
 
 func die():
+	Global.game_world.respawn()
 	print("You died!")
 
 func _input(event: InputEvent) -> void:
