@@ -174,6 +174,11 @@ animations = [{
 "name": &"idle_side",
 "speed": 3.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"swing_backward",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_47g3u")
@@ -286,7 +291,7 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -6)
 sprite_frames = SubResource("SpriteFrames_x4x15")
-animation = &"walk_side"
+animation = &"swing_backward"
 autoplay = "idle_forward"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
