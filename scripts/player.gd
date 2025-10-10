@@ -3,6 +3,7 @@ class_name Player
 
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_box: Area2D = $"Attack Box"
 
 @export var move_speed: float = 200.0
 @export var maxHealth : int = 100
@@ -53,14 +54,22 @@ func handle_sprite(direction: Vector2) -> void:
 	
 	if facing.y > 0:
 		animated_sprite.play(prefix + "_forward")
+		attack_box.rotation_degrees = 90
+		attack_box.position = Vector2(0,40)
 	elif facing.y < 0:
 		animated_sprite.play(prefix + "_backward")
+		attack_box.rotation_degrees = 90
+		attack_box.position = Vector2(0,-30)
 	elif facing.x < 0:
 		animated_sprite.play(prefix + "_side")
 		animated_sprite.flip_h = true
+		attack_box.rotation_degrees = 0
+		attack_box.position = Vector2(-30,0)
 	elif facing.x > 0:
 		animated_sprite.play(prefix + "_side")
 		animated_sprite.flip_h = false
+		attack_box.rotation_degrees = 0
+		attack_box.position = Vector2(30,0)
 
 func collect_pickup(_type : String, _amount : int):
 	if _type == "coin":

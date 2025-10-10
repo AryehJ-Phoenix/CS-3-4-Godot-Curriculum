@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://errimxtdby0j"]
+
+[ext_resource type="Script" uid="uid://d2qehmxp4luh0" path="res://scripts/shopkeep.gd" id="1_ld36g"]
+[ext_resource type="Texture2D" uid="uid://ww78fb7ck6kj" path="res://assets/2D Pixel Dungeon Asset Pack/image.png" id="2_il4tv"]
+[ext_resource type="PackedScene" uid="uid://l7oauc6tswy3" path="res://scenes/enemies/detection_radius.tscn" id="4_hm1b6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ev18q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ealaw"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(0, 0, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axme0"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(19, 0, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhhe1"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(38, 0, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuoys"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(0, 22, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vokm"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(19, 22, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4emg4"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(38, 22, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl4in"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(19, 22, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyauf"]
+atlas = ExtResource("2_il4tv")
+region = Rect2(0, 22, 19, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_50fxq"]
+animations = [{
+"frames": [{
+"duration": 19.0,
+"texture": SubResource("AtlasTexture_ealaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axme0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhhe1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuoys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vokm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4emg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl4in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyauf")
+}],
+"loop": true,
+"name": &"wave",
+"speed": 10.0
+}]
+
+[node name="Shopkeep" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_ld36g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ev18q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_50fxq")
+animation = &"wave"
+autoplay = "idle"
+
+[node name="See" parent="." instance=ExtResource("4_hm1b6")]
+
+[node name="Talk" parent="." instance=ExtResource("4_hm1b6")]
+scale = Vector2(0.25, 0.25)
+
+[connection signal="body_entered" from="See" to="." method="_on_see_body_entered"]
+[connection signal="body_exited" from="See" to="." method="_on_see_body_exited"]
+[connection signal="body_entered" from="Talk" to="." method="_on_talk_body_entered"]
+[connection signal="body_exited" from="Talk" to="." method="_on_talk_body_exited"]
