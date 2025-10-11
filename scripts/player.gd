@@ -14,6 +14,9 @@ var knockback: Vector2 = Vector2.ZERO
 var knockback_cooldown: float = 0.0
 var facing: Vector2 = Vector2.ZERO
 var keys: int = 0
+var attacking: bool = false
+var attack_timer: float = 0.5
+var damage: int = -10
 
 func _ready():
 	print("Player is ready!")
@@ -27,8 +30,21 @@ func _physics_process(delta):
 			knockback = Vector2.ZERO
 	else:
 		handle_movement()
-	move_and_slide()
 	
+	if Input.is_action_just_pressed("ui_accept") and !attacking:
+		attack()
+	if attacking:
+		attack_timer -= delta
+		attack_box.collision_mask = 1
+	if !attacking:
+		attack_box.collision_mask = 100
+		attack_timer = 0.5
+	if attack_timer <= 0:
+		attacking = false
+	
+	
+	if !attacking:
+		move_and_slide()
 
 func handle_movement():
 	# Get input direction from arrow keys
@@ -51,25 +67,19 @@ func handle_sprite(direction: Vector2) -> void:
 		prefix = "idle"
 	else:
 		facing = direction
+	if attacking:
+		prefix = "swing"
 	
 	if facing.y > 0:
 		animated_sprite.play(prefix + "_forward")
-		attack_box.rotation_degrees = 90
-		attack_box.position = Vector2(0,40)
 	elif facing.y < 0:
 		animated_sprite.play(prefix + "_backward")
-		attack_box.rotation_degrees = 90
-		attack_box.position = Vector2(0,-30)
 	elif facing.x < 0:
 		animated_sprite.play(prefix + "_side")
 		animated_sprite.flip_h = true
-		attack_box.rotation_degrees = 0
-		attack_box.position = Vector2(-30,0)
 	elif facing.x > 0:
 		animated_sprite.play(prefix + "_side")
 		animated_sprite.flip_h = false
-		attack_box.rotation_degrees = 0
-		attack_box.position = Vector2(30,0)
 
 func collect_pickup(_type : String, _amount : int):
 	if _type == "coin":
@@ -105,3 +115,38 @@ func _input(event: InputEvent) -> void:
 func apply_knockback(direction: Vector2, strength: float, duration: float) -> void:
 	knockback = direction * strength
 	knockback_cooldown = duration
+
+func attack():
+	attacking = true
+	
+	match facing:
+		Vector2(0,1):
+			attack_box.rotation_degrees = 90
+			attack_box.position = Vector2(0,40)
+		Vector2(0,-1):
+			attack_box.rotation_degrees = 90
+			attack_box.position = Vector2(0,-30)
+		Vector2(-1,0):
+			attack_box.rotation_degrees = 0
+			attack_box.position = Vector2(-30,0)
+		Vector2(1,0):
+			attack_box.rotation_degrees = 0
+			attack_box.position = Vector2(30,0)
+		
+		Vector2(1,1):
+			attack_box.rotation_degrees = 45
+			attack_box.position = Vector2(20,30)
+		Vector2(1,-1):
+			attack_box.rotation_degrees = 135
+			attack_box.position = Vector2(20,-20)
+		Vector2(-1,1):
+			attack_box.rotation_degrees = 135
+			attack_box.position = Vector2(-20,30)
+		Vector2(-1,-1):
+			attack_box.rotation_degrees = 45
+			attack_box.position = Vector2(-20,-20)
+
+
+func _on_attack_box_body_entered(body: Node2D) -> void:
+	if body is npc:
+		body.change_health(damage)

@@ -60,3 +60,8 @@ func _on_hurt_box_body_exited(body: Node2D) -> void:
 
 func _reset_damage_cooldown():
 	can_damage = true
+
+
+func die():
+	print("enemy killed")
+	queue_free()

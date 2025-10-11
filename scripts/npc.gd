@@ -3,7 +3,7 @@ class_name npc
 
 @onready var player: Player = %Player
 
-@export var health : int = 10
+@export var maxHealth : int = 20
 @export var speed : int = 100
 @export var is_hostile : bool = false
 @export var move_points : Array[Vector2] = []
@@ -15,11 +15,11 @@ class_name npc
 @export var target : Vector2
 @export var damage: int = -20
 
+var health: int
 var direction = null
 
 func _ready() -> void:
-	
-	pass
+	health = maxHealth
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -48,4 +48,18 @@ func movement(_delta):
 	direction = position.direction_to(target)
 	velocity = speed * direction
 	
+	pass
+
+
+func change_health(_amount):
+	health += _amount
+	if health > maxHealth:
+		health = maxHealth
+		
+	elif health < 1:
+		die()
+		
+	print("NPC Health: " + str(health))
+
+func die():
 	pass
