@@ -10,6 +10,8 @@ class_name Player
 @export var health : int = maxHealth
 @export var coins : int = 0
 
+var attack_direction: Vector2
+var knockback_direction: Vector2
 var knockback: Vector2 = Vector2.ZERO
 var knockback_cooldown: float = 0.0
 var facing: Vector2 = Vector2.ZERO
@@ -39,6 +41,8 @@ func _physics_process(delta):
 	if !attacking:
 		attack_box.collision_mask = 100
 		attack_timer = 0.5
+	if attack_timer <= 0.4:
+		attack_box.collision_mask = 100
 	if attack_timer <= 0:
 		attacking = false
 	
@@ -119,6 +123,12 @@ func apply_knockback(direction: Vector2, strength: float, duration: float) -> vo
 func attack():
 	attacking = true
 	
+	attack_direction = (get_global_mouse_position() - global_position).normalized()
+	if attack_direction.x > 0.5:
+		attack_direction.x = 1
+	
+	print(attack_direction)
+	
 	match facing:
 		Vector2(0,1):
 			attack_box.rotation_degrees = 90
@@ -150,3 +160,5 @@ func attack():
 func _on_attack_box_body_entered(body: Node2D) -> void:
 	if body is npc:
 		body.change_health(damage)
+		knockback_direction = (body.global_position - global_position).normalized()
+		body.apply_knockback(knockback_direction, 300.0, 0.12)

@@ -428,7 +428,7 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -6)
 sprite_frames = SubResource("SpriteFrames_x4x15")
-animation = &"swing_side"
+animation = &"swing_backward"
 autoplay = "idle_forward"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

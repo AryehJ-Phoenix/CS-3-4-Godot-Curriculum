@@ -113,6 +113,7 @@ unique_name_in_owner = true
 
 [node name="slime" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(-475, 15)
+maxHealth = 1000
 move_points = Array[Vector2]([Vector2(-475, 125), Vector2(-325, 125), Vector2(-325, -20), Vector2(-475, -20)])
 
 [node name="Shopkeep" parent="." instance=ExtResource("14_a8y0u")]

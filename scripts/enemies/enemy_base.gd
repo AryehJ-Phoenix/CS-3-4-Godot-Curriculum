@@ -15,13 +15,18 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	super.movement(delta)
-	
 	if stuck_check:
 		stuck_timer -= delta
 	if !stuck_check:
 		stuck_timer = 0.5
 	
+	if knockback_cooldown > 0.0:
+		velocity = knockback
+		knockback_cooldown -= delta
+		if knockback_cooldown <= 0.0:
+			knockback = Vector2.ZERO
+	else:
+		super.movement(delta)
 	
 	if stuck_timer > 0 and can_damage:
 		move_and_slide()
@@ -65,3 +70,8 @@ func _reset_damage_cooldown():
 func die():
 	print("enemy killed")
 	queue_free()
+
+
+func apply_knockback(direction: Vector2, strength: float, duration: float) -> void:
+	knockback = direction * strength
+	knockback_cooldown = duration

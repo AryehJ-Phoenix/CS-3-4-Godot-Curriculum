@@ -15,6 +15,8 @@ class_name npc
 @export var target : Vector2
 @export var damage: int = -20
 
+var knockback: Vector2 = Vector2.ZERO
+var knockback_cooldown: float = 0
 var health: int
 var direction = null
 
@@ -22,9 +24,14 @@ func _ready() -> void:
 	health = maxHealth
 
 func _physics_process(delta: float) -> void:
-	movement(delta)
+	if knockback_cooldown > 0.0:
+		velocity = knockback
+		knockback_cooldown -= delta
+		if knockback_cooldown <= 0.0:
+			knockback = Vector2.ZERO
+	else:
+		movement(delta)
 	move_and_slide()
-	pass
 	
 
 func _on_detection_radius_body_entered(_body: Node2D) -> void:
@@ -63,3 +70,8 @@ func change_health(_amount):
 
 func die():
 	pass
+
+
+func apply_knockback(direction: Vector2, strength: float, duration: float) -> void:
+	knockback = direction * strength
+	knockback_cooldown = duration
