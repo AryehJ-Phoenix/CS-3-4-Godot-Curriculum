@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuubs7y8is5i5"]
+
+[ext_resource type="Script" uid="uid://efh8g70xbbix" path="res://scripts/coin_label.gd" id="1_ht72w"]
+[ext_resource type="Texture2D" uid="uid://dvjyf7fo175q4" path="res://assets/2D Pixel Dungeon Asset Pack/interface/image.png" id="1_ths4w"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ht72w"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eu35l"]
+light_mode = 1
+
+[node name="Coin Label" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ht72w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ht72w")
+texture = ExtResource("1_ths4w")
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("CanvasItemMaterial_eu35l")
+offset_left = 32.0
+offset_top = -16.0
+offset_right = 178.0
+offset_bottom = 7.0
+scale = Vector2(2, 2)
+text = "24"

@@ -1,11 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
-
+@onready var health_label: Label = $"Health Label/Label"
+@onready var heart: AnimatedSprite2D = $"Health Label/AnimatedSprite2D"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_box: Area2D = $"Attack Box"
 
-@export var move_speed: float = 200.0
+@export var move_speed: float = 150.0
 @export var maxHealth : int = 100
 @export var health : int = maxHealth
 @export var coins : int = 0
@@ -18,7 +19,7 @@ var facing: Vector2 = Vector2.ZERO
 var keys: int = 0
 var attacking: bool = false
 var attack_timer: float = 0.5
-var damage: int = -10
+var damage: int = -15
 
 func _ready():
 	print("Player is ready!")
@@ -33,7 +34,9 @@ func _physics_process(delta):
 	else:
 		handle_movement()
 	
-	if Input.is_action_just_pressed("ui_accept") and !attacking:
+	health_label.text = str(health)
+	
+	if Input.is_action_just_pressed("left_click") and !attacking:
 		attack()
 	if attacking:
 		attack_timer -= delta
@@ -41,7 +44,7 @@ func _physics_process(delta):
 	if !attacking:
 		attack_box.collision_mask = 100
 		attack_timer = 0.5
-	if attack_timer <= 0.4:
+	if attack_timer <= 0.25:
 		attack_box.collision_mask = 100
 	if attack_timer <= 0:
 		attacking = false
@@ -73,6 +76,7 @@ func handle_sprite(direction: Vector2) -> void:
 		facing = direction
 	if attacking:
 		prefix = "swing"
+		facing = attack_direction
 	
 	if facing.y > 0:
 		animated_sprite.play(prefix + "_forward")
@@ -105,12 +109,23 @@ func change_health(_amount):
 		
 	elif health < 1:
 		die()
-		
+	
+	if _amount < 0:
+		heart.play("hurt")
+		get_tree().create_timer(0.5).timeout.connect(_reset_heart)
+	if _amount > 0:
+		heart.scale = Vector2(1.5,1.5)
+		get_tree().create_timer(0.25).timeout.connect(_reset_heart)
+	
 	print("Health: " + str(health))
 
 func die():
 	Global.game_world.respawn()
 	print("You died!")
+
+func _reset_heart():
+	heart.play("normal")
+	heart.scale = Vector2(1,1)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -124,37 +139,47 @@ func attack():
 	attacking = true
 	
 	attack_direction = (get_global_mouse_position() - global_position).normalized()
-	if attack_direction.x > 0.5:
+	
+	if attack_direction.x >= -0.45 and attack_direction.x <= 0.45:
+		attack_direction.x = 0
+	if attack_direction.x > 0.45:
 		attack_direction.x = 1
+	if attack_direction.x < -0.45:
+		attack_direction.x = -1
 	
-	print(attack_direction)
+	if attack_direction.y >= -0.45 and attack_direction.y <= 0.45:
+		attack_direction.y = 0
+	if attack_direction.y > 0.45:
+		attack_direction.y = 1
+	if attack_direction.y < -0.45:
+		attack_direction.y = -1
 	
-	match facing:
+	match attack_direction:
 		Vector2(0,1):
 			attack_box.rotation_degrees = 90
-			attack_box.position = Vector2(0,40)
+			attack_box.position = Vector2(0,50)
 		Vector2(0,-1):
 			attack_box.rotation_degrees = 90
-			attack_box.position = Vector2(0,-30)
+			attack_box.position = Vector2(0,-10)
 		Vector2(-1,0):
 			attack_box.rotation_degrees = 0
-			attack_box.position = Vector2(-30,0)
+			attack_box.position = Vector2(-30,20)
 		Vector2(1,0):
 			attack_box.rotation_degrees = 0
-			attack_box.position = Vector2(30,0)
+			attack_box.position = Vector2(30,20)
 		
 		Vector2(1,1):
 			attack_box.rotation_degrees = 45
-			attack_box.position = Vector2(20,30)
+			attack_box.position = Vector2(20,40)
 		Vector2(1,-1):
 			attack_box.rotation_degrees = 135
-			attack_box.position = Vector2(20,-20)
+			attack_box.position = Vector2(20,0)
 		Vector2(-1,1):
 			attack_box.rotation_degrees = 135
-			attack_box.position = Vector2(-20,30)
+			attack_box.position = Vector2(-20,40)
 		Vector2(-1,-1):
 			attack_box.rotation_degrees = 45
-			attack_box.position = Vector2(-20,-20)
+			attack_box.position = Vector2(-20,0)
 
 
 func _on_attack_box_body_entered(body: Node2D) -> void:

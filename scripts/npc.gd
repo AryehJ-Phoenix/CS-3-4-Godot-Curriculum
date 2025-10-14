@@ -3,7 +3,7 @@ class_name npc
 
 @onready var player: Player = %Player
 
-@export var maxHealth : int = 20
+@export var maxHealth : int = 50
 @export var speed : int = 100
 @export var is_hostile : bool = false
 @export var move_points : Array[Vector2] = []
