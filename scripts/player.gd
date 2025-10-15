@@ -20,6 +20,7 @@ var keys: int = 0
 var attacking: bool = false
 var attack_timer: float = 0.5
 var damage: int = -15
+var direction = Vector2.ZERO
 
 func _ready():
 	print("Player is ready!")
@@ -32,8 +33,12 @@ func _physics_process(delta):
 		if knockback_cooldown <= 0.0:
 			knockback = Vector2.ZERO
 	else:
-		handle_movement()
+		if !attacking:
+			handle_movement()
+		if attacking:
+			velocity = Vector2(0,0)
 	
+	handle_sprite(direction)
 	health_label.text = str(health)
 	
 	if Input.is_action_just_pressed("left_click") and !attacking:
@@ -50,15 +55,12 @@ func _physics_process(delta):
 		attacking = false
 	
 	
-	if !attacking:
-		move_and_slide()
+	move_and_slide()
 
 func handle_movement():
 	# Get input direction from arrow keys
-	var direction = Vector2.ZERO
 	direction.x = Input.get_axis("ui_left", "ui_right")
 	direction.y = Input.get_axis("ui_up", "ui_down")
-	handle_sprite(direction)
 	
 	# Normalize diagonal movement to prevent speed boost
 	if direction.length() > 0:
