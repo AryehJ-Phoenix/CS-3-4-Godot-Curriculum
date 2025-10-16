@@ -114,7 +114,7 @@ label = "large"
 
 [node name="Shopkeep" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("14_a8y0u")]
 position = Vector2(477, -58)
-inventory = [PackedStringArray("")]
+inventory = [null]
 
 [node name="Player" parent="." instance=ExtResource("1_2j8vx")]
 unique_name_in_owner = true
