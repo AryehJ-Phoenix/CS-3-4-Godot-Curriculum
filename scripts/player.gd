@@ -5,6 +5,7 @@ class_name Player
 @onready var heart: AnimatedSprite2D = $"Health Label/AnimatedSprite2D"
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_box: Area2D = $"Attack Box"
+const throwing_knife = preload("res://scenes/throwing_knife.tscn")
 
 @export var move_speed: float = 150.0
 @export var maxHealth : int = 100
@@ -21,6 +22,8 @@ var attacking: bool = false
 var attack_timer: float = 0.5
 var damage: int = -15
 var direction = Vector2.ZERO
+var throwing_knives: int = 5
+var knife_direction: Vector2
 
 func _ready():
 	print("Player is ready!")
@@ -54,6 +57,9 @@ func _physics_process(delta):
 	if attack_timer <= 0:
 		attacking = false
 	
+	if Input.is_action_just_pressed("right_click") and throwing_knives > 0:
+		throwing_knives -= 1
+		throw_knife((get_global_mouse_position() - global_position).normalized())
 	
 	move_and_slide()
 
@@ -189,3 +195,9 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 		body.change_health(damage)
 		knockback_direction = (body.global_position - global_position).normalized()
 		body.apply_knockback(knockback_direction, 300.0, 0.12)
+
+
+func throw_knife(angle):
+	var knife = throwing_knife.instantiate()
+	knife.global_position = global_position
+	knife.direction = angle

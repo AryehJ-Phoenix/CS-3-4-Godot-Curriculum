@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="inventory_item" load_steps=2 format=3 uid="uid://dbne6adpioivn"]
+
+[ext_resource type="Script" uid="uid://b6olftcjtb4cn" path="res://scripts/inventory.gd" id="1_vue1v"]
+
+[resource]
+script = ExtResource("1_vue1v")
+item_name = "potion"
+value = 10
+description = "A potion which can heal minor wounds"
+metadata/_custom_type_script = "uid://b6olftcjtb4cn"

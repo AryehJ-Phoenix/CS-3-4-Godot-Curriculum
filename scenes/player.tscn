@@ -509,4 +509,6 @@ offset_bottom = 18.0
 scale = Vector2(0.5, 0.5)
 text = "24"
 
+[node name="deathscreen" type="Sprite2D" parent="."]
+
 [connection signal="body_entered" from="Attack Box" to="." method="_on_attack_box_body_entered"]

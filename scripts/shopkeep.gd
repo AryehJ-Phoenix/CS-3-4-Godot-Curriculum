@@ -3,7 +3,6 @@ extends npc
 class_name shopkeep
 
 
-@export var inventory: Array[pickup]
 @export var open: bool = true
 @export var buyer: bool = false
 @export var return_amount: float = 0.8

@@ -8,7 +8,8 @@ class_name npc
 @export var is_hostile : bool = false
 @export var move_points : Array[Vector2] = []
 @export var move_point : int = 0
-@export var dialogue : Array[String] = []
+@export var dialogue : PackedStringArray = []
+@export var inventory: Array[inventory_item]
 @export var inventory_drop : int = 0
 @export var type : String = ""
 @export var target : Vector2
