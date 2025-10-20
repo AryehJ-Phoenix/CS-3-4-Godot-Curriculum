@@ -199,5 +199,6 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 
 func throw_knife(angle):
 	var knife = throwing_knife.instantiate()
-	knife.global_position = global_position
+	knife.position = position
 	knife.direction = angle
+	get_parent().add_child(knife)
