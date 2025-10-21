@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://cqvpxnx2pwqhk"]
+[gd_scene load_steps=79 format=3 uid="uid://cqvpxnx2pwqhk"]
 
 [ext_resource type="Script" uid="uid://dbc6krbwjvop0" path="res://scripts/player.gd" id="1_4x8vn"]
 [ext_resource type="Texture2D" uid="uid://c1j65egvfiye4" path="res://assets/lpc_male_animations_2025-09-04T20-28-14/standard/idle.png" id="2_wn8rh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwd62n2s4k1j5" path="res://assets/point_light.webp" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://cuubs7y8is5i5" path="res://scenes/coin_label.tscn" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://bwag2sgojp46" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (27).png" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://btnbqk4m8fdg5" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (30).png" id="8_smehm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 
@@ -465,6 +466,87 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_smehm"]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ur7pv"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
+atlas = ExtResource("8_smehm")
+region = Rect2(28, 52, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
+atlas = ExtResource("8_smehm")
+region = Rect2(0, 52, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
+atlas = ExtResource("8_smehm")
+region = Rect2(28, 26, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
+atlas = ExtResource("8_smehm")
+region = Rect2(0, 26, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
+atlas = ExtResource("8_smehm")
+region = Rect2(28, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_487ah"]
+atlas = ExtResource("8_smehm")
+region = Rect2(0, 0, 28, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_md1ol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf23h")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7fs")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl8cc")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_487ah")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y4r1p"]
+light_mode = 1
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4x8vn")
 
@@ -508,6 +590,22 @@ offset_right = 27.0
 offset_bottom = 18.0
 scale = Vector2(0.5, 0.5)
 text = "24"
+
+[node name="Knife Label" type="Node2D" parent="."]
+position = Vector2(-592, -264)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Knife Label"]
+material = SubResource("CanvasItemMaterial_ur7pv")
+sprite_frames = SubResource("SpriteFrames_md1ol")
+animation = &"5"
+
+[node name="Label" type="Label" parent="Knife Label"]
+material = SubResource("CanvasItemMaterial_y4r1p")
+offset_left = 16.0
+offset_top = -11.0
+offset_right = 56.0
+offset_bottom = 12.0
+text = "23"
 
 [node name="deathscreen" type="Sprite2D" parent="."]
 

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="inventory_item" load_steps=2 format=3 uid="uid://c35akg57w7152"]
+
+[ext_resource type="Script" uid="uid://b6olftcjtb4cn" path="res://scripts/inventory.gd" id="1_he3h4"]
+
+[resource]
+script = ExtResource("1_he3h4")
+item_name = "throwing_knives"
+value = 15
+description = "5 sharp throwing knives"
+metadata/_custom_type_script = "uid://b6olftcjtb4cn"

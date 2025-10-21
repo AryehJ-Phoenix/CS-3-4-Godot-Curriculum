@@ -3,6 +3,9 @@ class_name Player
 
 @onready var health_label: Label = $"Health Label/Label"
 @onready var heart: AnimatedSprite2D = $"Health Label/AnimatedSprite2D"
+@onready var knife_label: Label = $"Knife Label/Label"
+@onready var knife_sprite: AnimatedSprite2D = $"Knife Label/AnimatedSprite2D"
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_box: Area2D = $"Attack Box"
 const throwing_knife = preload("res://scenes/throwing_knife.tscn")
@@ -22,7 +25,7 @@ var attacking: bool = false
 var attack_timer: float = 0.5
 var damage: int = -15
 var direction = Vector2.ZERO
-var throwing_knives: int = 5
+var throwing_knives: int = 4
 var knife_direction: Vector2
 
 func _ready():
@@ -43,6 +46,32 @@ func _physics_process(delta):
 	
 	handle_sprite(direction)
 	health_label.text = str(health)
+	knife_label.text = str(throwing_knives)
+	match throwing_knives:
+		0:
+			knife_sprite.play("0")
+			knife_label.visible = false
+		1: 
+			knife_sprite.play("1")
+			knife_label.visible = true
+		2:
+			knife_sprite.play("2")
+			knife_label.visible = true
+		3:
+			knife_sprite.play("3")
+			knife_label.visible = true
+		4:
+			knife_sprite.play("4")
+			knife_label.visible = true
+		5:
+			knife_sprite.play("5")
+			knife_label.visible = true
+		_:
+			knife_sprite.play("5")
+			knife_label.visible = true
+	
+	if Input.is_action_just_pressed("ui_text_backspace"):
+		throwing_knives += 1
 	
 	if Input.is_action_just_pressed("left_click") and !attacking:
 		attack()
@@ -199,6 +228,6 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 
 func throw_knife(angle):
 	var knife = throwing_knife.instantiate()
-	knife.position = position
+	knife.global_position = global_position
 	knife.direction = angle
 	get_parent().add_child(knife)
