@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cpcjxr26k8tgw"]
+[gd_scene load_steps=19 format=4 uid="uid://cpcjxr26k8tgw"]
 
 [ext_resource type="PackedScene" uid="uid://cqvpxnx2pwqhk" path="res://scenes/player.tscn" id="1_2j8vx"]
 [ext_resource type="Script" uid="uid://bnk74kv0ariww" path="res://scripts/game_world.gd" id="2_3k9wy"]
@@ -13,7 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://6pypymriwsi4" path="res://scenes/chest_coin_particles.tscn" id="10_trceg"]
 [ext_resource type="PackedScene" uid="uid://c6gaa4kprawy0" path="res://scenes/enemies/slime.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfwht38pwyap6" path="res://scenes/key.tscn" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://b6olftcjtb4cn" path="res://scripts/inventory.gd" id="13_muem4"]
 [ext_resource type="PackedScene" uid="uid://errimxtdby0j" path="res://scenes/shopkeep.tscn" id="14_a8y0u"]
+[ext_resource type="Resource" uid="uid://dbne6adpioivn" path="res://resources/potion.tres" id="14_dp3eg"]
+[ext_resource type="Resource" uid="uid://c35akg57w7152" path="res://resources/throwing_knives.tres" id="15_0ld40"]
 
 [sub_resource type="Environment" id="Environment_jyhfs"]
 background_energy_multiplier = 0.1
@@ -114,6 +117,7 @@ label = "large"
 
 [node name="Shopkeep" parent="." instance=ExtResource("14_a8y0u")]
 position = Vector2(477, -58)
+inventory = Array[ExtResource("13_muem4")]([ExtResource("14_dp3eg"), ExtResource("14_dp3eg"), ExtResource("15_0ld40"), ExtResource("15_0ld40"), ExtResource("15_0ld40")])
 
 [node name="Player" parent="." instance=ExtResource("1_2j8vx")]
 unique_name_in_owner = true

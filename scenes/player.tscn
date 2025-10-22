@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cqvpxnx2pwqhk"]
+[gd_scene load_steps=81 format=3 uid="uid://cqvpxnx2pwqhk"]
 
 [ext_resource type="Script" uid="uid://dbc6krbwjvop0" path="res://scripts/player.gd" id="1_4x8vn"]
 [ext_resource type="Texture2D" uid="uid://c1j65egvfiye4" path="res://assets/lpc_male_animations_2025-09-04T20-28-14/standard/idle.png" id="2_wn8rh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cuubs7y8is5i5" path="res://scenes/coin_label.tscn" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://bwag2sgojp46" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (27).png" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://btnbqk4m8fdg5" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (30).png" id="8_smehm"]
+[ext_resource type="Texture2D" uid="uid://cnl58dpwwhuxb" path="res://assets/2D Pixel Dungeon Asset Pack/interface/image (2).png" id="9_ur7pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 
@@ -547,6 +548,9 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y4r1p"]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d2wvv"]
+light_mode = 1
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4x8vn")
 
@@ -608,5 +612,10 @@ offset_bottom = 12.0
 text = "23"
 
 [node name="deathscreen" type="Sprite2D" parent="."]
+visible = false
+z_index = 10
+material = SubResource("CanvasItemMaterial_d2wvv")
+scale = Vector2(2.0504336, 2.0504339)
+texture = ExtResource("9_ur7pv")
 
 [connection signal="body_entered" from="Attack Box" to="." method="_on_attack_box_body_entered"]

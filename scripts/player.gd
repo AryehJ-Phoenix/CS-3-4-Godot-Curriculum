@@ -14,6 +14,7 @@ const throwing_knife = preload("res://scenes/throwing_knife.tscn")
 @export var maxHealth : int = 100
 @export var health : int = maxHealth
 @export var coins : int = 0
+@export var spawnpoint: Vector2 = Vector2(0,0)
 
 var attack_direction: Vector2
 var knockback_direction: Vector2
@@ -29,6 +30,7 @@ var throwing_knives: int = 8
 var knife_direction: Vector2
 
 func _ready():
+	global_position = spawnpoint
 	print("Player is ready!")
 	# TODO: Add detailed character info display (Lesson 1)
 
@@ -45,30 +47,6 @@ func _physics_process(delta):
 			velocity = Vector2(0,0)
 	
 	handle_sprite(direction)
-	health_label.text = str(health)
-	knife_label.text = str(throwing_knives)
-	match throwing_knives:
-		0:
-			knife_sprite.play("0")
-			knife_label.visible = false
-		1: 
-			knife_sprite.play("1")
-			knife_label.visible = true
-		2:
-			knife_sprite.play("2")
-			knife_label.visible = true
-		3:
-			knife_sprite.play("3")
-			knife_label.visible = true
-		4:
-			knife_sprite.play("4")
-			knife_label.visible = true
-		5:
-			knife_sprite.play("5")
-			knife_label.visible = true
-		_:
-			knife_sprite.play("5")
-			knife_label.visible = true
 	
 	if Input.is_action_just_pressed("ui_text_backspace"):
 		throwing_knives += 1
@@ -125,6 +103,31 @@ func handle_sprite(direction: Vector2) -> void:
 	elif facing.x > 0:
 		animated_sprite.play(prefix + "_side")
 		animated_sprite.flip_h = false
+	
+	health_label.text = str(health)
+	knife_label.text = str(throwing_knives)
+	match throwing_knives:
+		0:
+			knife_sprite.play("0")
+			knife_label.visible = false
+		1: 
+			knife_sprite.play("1")
+			knife_label.visible = true
+		2:
+			knife_sprite.play("2")
+			knife_label.visible = true
+		3:
+			knife_sprite.play("3")
+			knife_label.visible = true
+		4:
+			knife_sprite.play("4")
+			knife_label.visible = true
+		5:
+			knife_sprite.play("5")
+			knife_label.visible = true
+		_:
+			knife_sprite.play("5")
+			knife_label.visible = true
 
 func collect_pickup(_type : String, _amount : int):
 	if _type == "coin":
@@ -132,12 +135,6 @@ func collect_pickup(_type : String, _amount : int):
 		print("Coins: " + str(coins))
 	elif _type == "health_potion":
 		change_health(_amount)
-		
-
-# TODO: Add character methods here (Lesson 2)
-
-# - level_up()
-# - attack()
 
 func change_health(_amount): 
 	health += _amount
@@ -157,8 +154,14 @@ func change_health(_amount):
 	print("Health: " + str(health))
 
 func die():
+	velocity = Vector2(0,0)
 	Global.game_world.respawn()
+	$deathscreen.visible = true
+	get_tree().create_timer(3).timeout.connect(reset_screen)
 	print("You died!")
+
+func reset_screen():
+	$deathscreen.visible = false
 
 func _reset_heart():
 	heart.play("normal")
@@ -218,13 +221,11 @@ func attack():
 			attack_box.rotation_degrees = 45
 			attack_box.position = Vector2(-20,0)
 
-
 func _on_attack_box_body_entered(body: Node2D) -> void:
 	if body is npc:
 		body.change_health(damage)
 		knockback_direction = (body.global_position - global_position).normalized()
 		body.apply_knockback(knockback_direction, 300.0, 0.12)
-
 
 func throw_knife(angle):
 	var knife = throwing_knife.instantiate()

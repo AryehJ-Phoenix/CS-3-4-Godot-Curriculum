@@ -14,7 +14,7 @@ func _ready():
 
 func respawn():
 	player.velocity = Vector2(0,0)
-	player.global_position = Vector2(0,0)
+	player.global_position = player.spawnpoint
 	player.health = player.maxHealth
 	player.coins /= 2
 
