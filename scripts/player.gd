@@ -25,7 +25,7 @@ var attacking: bool = false
 var attack_timer: float = 0.5
 var damage: int = -15
 var direction = Vector2.ZERO
-var throwing_knives: int = 4
+var throwing_knives: int = 8
 var knife_direction: Vector2
 
 func _ready():
