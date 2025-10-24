@@ -2,6 +2,7 @@ extends npc
 
 @onready var sprite: Sprite2D = $Sprite2D
 
+
 var knockback_direction: Vector2
 var damage_cooldown: float = 0.2
 var can_damage: bool = true
@@ -11,7 +12,7 @@ var stuck_timer: float = 0.5
 
 func _ready() -> void:
 	super._ready()
-	
+
 
 
 func _physics_process(delta: float) -> void:

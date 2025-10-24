@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://errimxtdby0j"]
+[gd_scene load_steps=43 format=3 uid="uid://errimxtdby0j"]
 
 [ext_resource type="Script" uid="uid://d2qehmxp4luh0" path="res://scripts/shopkeep.gd" id="1_ld36g"]
 [ext_resource type="Texture2D" uid="uid://ww78fb7ck6kj" path="res://assets/2D Pixel Dungeon Asset Pack/image.png" id="2_il4tv"]
 [ext_resource type="PackedScene" uid="uid://l7oauc6tswy3" path="res://scenes/enemies/detection_radius.tscn" id="4_hm1b6"]
 [ext_resource type="Texture2D" uid="uid://ww50phvebidy" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel.png" id="4_il4tv"]
 [ext_resource type="Texture2D" uid="uid://26v83kuojra6" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (1).png" id="5_hm1b6"]
+[ext_resource type="Texture2D" uid="uid://bwd62n2s4k1j5" path="res://assets/point_light.webp" id="6_hm1b6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev18q"]
 size = Vector2(11, 11)
@@ -329,6 +330,11 @@ text = "knives
 
 cost: 15"
 horizontal_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
+energy = 0.5
+texture = ExtResource("6_hm1b6")
 
 [connection signal="body_entered" from="See" to="." method="_on_see_body_entered"]
 [connection signal="body_exited" from="See" to="." method="_on_see_body_exited"]
