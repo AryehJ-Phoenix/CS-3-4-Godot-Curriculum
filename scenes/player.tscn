@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cqvpxnx2pwqhk"]
+[gd_scene load_steps=85 format=3 uid="uid://cqvpxnx2pwqhk"]
 
 [ext_resource type="Script" uid="uid://dbc6krbwjvop0" path="res://scripts/player.gd" id="1_4x8vn"]
 [ext_resource type="Texture2D" uid="uid://c1j65egvfiye4" path="res://assets/lpc_male_animations_2025-09-04T20-28-14/standard/idle.png" id="2_wn8rh"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://bwag2sgojp46" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (27).png" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://btnbqk4m8fdg5" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (30).png" id="8_smehm"]
 [ext_resource type="Texture2D" uid="uid://cnl58dpwwhuxb" path="res://assets/2D Pixel Dungeon Asset Pack/interface/image (2).png" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://cnbwn71qwwnjk" path="res://scripts/inventory.gd" id="10_jej6c"]
+[ext_resource type="Script" uid="uid://b6olftcjtb4cn" path="res://scripts/inventory_item.gd" id="11_f1ej7"]
+[ext_resource type="Resource" uid="uid://dbne6adpioivn" path="res://resources/potion.tres" id="12_oprun"]
+[ext_resource type="Resource" uid="uid://c35akg57w7152" path="res://resources/throwing_knives.tres" id="13_a8ls1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 
@@ -617,5 +621,9 @@ z_index = 10
 material = SubResource("CanvasItemMaterial_d2wvv")
 scale = Vector2(2.0504336, 2.0504339)
 texture = ExtResource("9_ur7pv")
+
+[node name="my inventory" type="Node2D" parent="."]
+script = ExtResource("10_jej6c")
+my_inventory = Array[ExtResource("11_f1ej7")]([ExtResource("12_oprun"), ExtResource("13_a8ls1")])
 
 [connection signal="body_entered" from="Attack Box" to="." method="_on_attack_box_body_entered"]

@@ -72,8 +72,8 @@ func _physics_process(delta):
 
 func handle_movement():
 	# Get input direction from arrow keys
-	direction.x = Input.get_axis("ui_left", "ui_right")
-	direction.y = Input.get_axis("ui_up", "ui_down")
+	direction.x = Input.get_axis("ui_a", "ui_d")
+	direction.y = Input.get_axis("ui_w", "ui_s")
 	
 	# Normalize diagonal movement to prevent speed boost
 	if direction.length() > 0:

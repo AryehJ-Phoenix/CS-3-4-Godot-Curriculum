@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://errimxtdby0j"]
+[gd_scene load_steps=44 format=3 uid="uid://errimxtdby0j"]
 
 [ext_resource type="Script" uid="uid://d2qehmxp4luh0" path="res://scripts/shopkeep.gd" id="1_ld36g"]
 [ext_resource type="Texture2D" uid="uid://ww78fb7ck6kj" path="res://assets/2D Pixel Dungeon Asset Pack/image.png" id="2_il4tv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ww50phvebidy" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel.png" id="4_il4tv"]
 [ext_resource type="Texture2D" uid="uid://26v83kuojra6" path="res://assets/2D Pixel Dungeon Asset Pack/interface/New Piskel (1).png" id="5_hm1b6"]
 [ext_resource type="Texture2D" uid="uid://bwd62n2s4k1j5" path="res://assets/point_light.webp" id="6_hm1b6"]
+[ext_resource type="Script" uid="uid://cnbwn71qwwnjk" path="res://scripts/inventory.gd" id="7_tuoys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev18q"]
 size = Vector2(11, 11)
@@ -266,20 +267,6 @@ animations = [{
 [node name="Shopkeep" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_ld36g")
-open = null
-buyer = null
-return_amount = null
-maxHealth = null
-speed = null
-is_hostile = null
-move_points = null
-move_point = null
-dialogue = null
-inventory = null
-inventory_drop = null
-type = null
-target = null
-damage = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 5.5)
@@ -335,6 +322,9 @@ horizontal_alignment = 1
 scale = Vector2(0.5, 0.5)
 energy = 0.5
 texture = ExtResource("6_hm1b6")
+
+[node name="my inventory" type="Node2D" parent="."]
+script = ExtResource("7_tuoys")
 
 [connection signal="body_entered" from="See" to="." method="_on_see_body_entered"]
 [connection signal="body_exited" from="See" to="." method="_on_see_body_exited"]
