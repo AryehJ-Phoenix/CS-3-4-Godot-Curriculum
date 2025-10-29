@@ -12,7 +12,7 @@ class_name shopkeep
 
 var waving = false
 var talking: bool = false
-var selected_item: int
+var selected_item: int = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 	
 	selected_item = my_inventory.selected_item
 	
-	
 	if talking:
 		if Input.is_action_just_pressed("ui_up"):
 			my_inventory.selected_item += 1
@@ -31,13 +30,15 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_down"):
 			my_inventory.selected_item -= 1
 			my_inventory.print_inventory()
-		if Input.is_action_just_pressed("ui_accept") and player.coins >= my_inventory.get(my_inventory.selected_item).value:
+		if Input.is_action_just_pressed("ui_accept") and player.coins >= my_inventory.inventory.get(selected_item).value:
 			if my_inventory.get(my_inventory.selected_item).amount > 0:
 				player.coins -= my_inventory.get(my_inventory.selected_item).value
 				if my_inventory.get(my_inventory.selected_item).item_name == "throwing_knives":
 					player.throwing_knives += 5
+					print("BOUGHT KNIVES")
 				if my_inventory.get(my_inventory.selected_item).item_name == "potion":
 					player.change_health(10)
+					print("BOUGHT POTION")
 			else:
 				print("OUT OF STOCK")
 		#if Input.is_action_just_pressed("ui_q") and player.coins >= 10 and my_inventory.get(my_inventory.selected_item).amount > 0:
