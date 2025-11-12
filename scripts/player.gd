@@ -55,6 +55,7 @@ var facing: Vector2 = Vector2.ZERO
 # Health System
 @export var max_health: float = 100.0
 var current_health: float = 100.0
+var damage: int = 10
 
 # Level and Experience
 var level: int = 1
@@ -64,6 +65,7 @@ var xp_to_next_level: float = 100.0
 
 # Signals for UI updates
 signal health_changed(new_health: float, max_health: float)
+signal speed_changed(new_speed: float, max_speed: float)
 signal xp_changed(current_xp: float, xp_needed: float)
 signal level_up(new_level: int)
 signal player_died
@@ -219,4 +221,5 @@ func upgrade_health(amount: float) -> bool:
 ## Returns true on successful upgrade
 func upgrade_speed(amount: float) -> bool:
 	move_speed += amount
+	speed_changed.emit(move_speed)
 	return true

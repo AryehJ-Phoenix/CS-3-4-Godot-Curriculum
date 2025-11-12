@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatUpgradeResource" load_steps=2 format=3 uid="uid://dndpj2tass0gi"]
+
+[ext_resource type="Script" uid="uid://b27lwx066vj4h" path="res://scripts/resources/stat_upgrade_resource.gd" id="1_406e2"]
+
+[resource]
+script = ExtResource("1_406e2")
+upgrade_id = "speed_boost"
+upgrade_name = "Max Speed + 20"
+description = "Increases your max speed"
+metadata/_custom_type_script = "uid://b27lwx066vj4h"
