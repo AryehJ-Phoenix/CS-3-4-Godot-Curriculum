@@ -70,7 +70,7 @@ class_name Projectile
 ##
 ## ============================================================================
 
-var player: Player
+var player: Player = null
 var damage: float = 10.0
 var speed: float = 400.0
 var direction: Vector2 = Vector2.RIGHT
