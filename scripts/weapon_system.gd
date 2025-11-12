@@ -61,7 +61,7 @@ class_name WeaponSystem
 
 var fire_cooldown: float = 0.0
 var nearest_enemy: Node2D = null
-
+@onready var player: Player = %Player
 
 func _ready() -> void:
 	# Load default weapon if equipped
@@ -140,6 +140,7 @@ func _fire_weapon(direction: Vector2) -> bool:
 		# Setup projectile
 		projectile_instance.direction = final_direction
 		projectile_instance.global_position = fire_point.global_position
+		projectile_instance.damage = player.damage
 
 		# Pass projectile resource to projectile
 		if equipped_weapon.projectile_config:

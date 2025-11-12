@@ -212,7 +212,6 @@ func apply_separation(current_direction: Vector2) -> Vector2:
 ## Take damage from player weapons
 ## Returns true if this damage killed the enemy
 func take_damage(amount: float) -> bool:
-	amount += player.damage
 	current_health -= amount
 
 	# Visual feedback (optional: flash sprite)

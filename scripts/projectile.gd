@@ -70,8 +70,7 @@ class_name Projectile
 ##
 ## ============================================================================
 
-var player: Player = null
-var damage: float = 10.0
+var damage: float = 0
 var speed: float = 400.0
 var direction: Vector2 = Vector2.RIGHT
 var lifetime: float = 3.0
@@ -94,7 +93,6 @@ var projectile_data: ProjectileResource = null
 
 func _ready() -> void:
 	# Connect to collision signals
-	damage = player.damage
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 
