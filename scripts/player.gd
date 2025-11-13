@@ -55,7 +55,8 @@ var facing: Vector2 = Vector2.ZERO
 # Health System
 @export var max_health: float = 100.0
 var current_health: float = 100.0
-var damage: int = 0
+var min_damage: int = 10
+var max_damage: int = 10
 
 # Level and Experience
 var level: int = 1

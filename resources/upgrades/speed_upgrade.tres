@@ -7,4 +7,6 @@ script = ExtResource("1_406e2")
 upgrade_id = "speed_boost"
 upgrade_name = "Max Speed + 20"
 description = "Increases your max speed"
+stat_type = 1
+amount = 20.0
 metadata/_custom_type_script = "uid://b27lwx066vj4h"

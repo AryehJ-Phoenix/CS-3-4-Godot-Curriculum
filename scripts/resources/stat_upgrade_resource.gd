@@ -78,6 +78,7 @@ class_name StatUpgradeResource
 enum UpgradeType {
 	HEALTH,    ## Increases max health
 	SPEED,     ## Increases max speed
+	DAMAGE,    ## Increases max damage
 }
 
 @export_group("Upgrade Identity")

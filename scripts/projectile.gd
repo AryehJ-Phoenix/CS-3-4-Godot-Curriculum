@@ -116,7 +116,6 @@ func setup(projectile_config: ProjectileResource) -> void:
 	# Store reference to resource for effect scripts
 	projectile_data = projectile_config
 
-	damage = projectile_config.damage
 	speed = projectile_config.speed
 	lifetime = projectile_config.lifetime
 	piercing = projectile_config.piercing
