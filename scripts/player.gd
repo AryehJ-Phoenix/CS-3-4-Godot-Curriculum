@@ -42,6 +42,7 @@ class_name Player
 ## ============================================================================
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var weapon_system: WeaponSystem = $WeaponSystem
 
 # Movement - Controls how fast the player moves
 @export var move_speed: float = 200.0
@@ -57,10 +58,11 @@ var facing: Vector2 = Vector2.ZERO
 var current_health: float = 100.0
 
 #Attack System
-var min_damage: float = 10
-var max_damage: float = 10
+var min_damage: float = 0
+var max_damage: float = 0
+var fire_rate_change: float = 0.0
 var piercing: bool = false
-var piercing_level: int = 1
+var piercing_level: int = 0
 
 # Level and Experience
 var level: int = 1
@@ -74,6 +76,7 @@ signal health_changed(new_health: float, max_health: float)
 signal speed_changed(new_speed: float, max_speed: float)
 signal damage_changed(new_min_damage: float, new_max_damage: float)
 signal piercing_changed(new_piercing_level: int)
+signal fire_rate_changed(new_fire_rate: int)
 signal xp_multiplier_changed(new_xp_multiplier: float)
 signal xp_changed(current_xp: float, xp_needed: float)
 signal level_up(new_level: int)
@@ -90,9 +93,15 @@ func _ready():
 	# Set collision layers (Layer 1 = player)
 	collision_layer = 1
 	collision_mask = 2 | 8  # Collide with enemies (layer 2) and XP drops (layer 8)
+	
+	piercing = weapon_system.equipped_weapon.projectile_config.piercing
+	piercing_level = weapon_system.equipped_weapon.projectile_config.max_pierces
 
 func _physics_process(_delta):
 	handle_movement()
+	
+	if Input.is_action_just_pressed("ui_shift"):
+		swap_weapon()
 
 func handle_movement():
 	# Get input direction from arrow keys
@@ -233,7 +242,7 @@ func upgrade_speed(amount: float) -> bool:
 	speed_changed.emit(move_speed)
 	return true
 
-func upgrade_damage(min_change: float, max_change: float):
+func upgrade_damage(min_change: float, max_change: float) -> bool:
 	min_damage += min_change
 	max_damage += max_change
 	if max_damage < min_damage:
@@ -252,3 +261,16 @@ func upgrade_xp_multiplier(amount: float) -> bool:
 	xp_multiplier += amount
 	xp_multiplier_changed.emit(xp_multiplier_changed)
 	return true
+
+func upgrade_fire_rate(amount: float) -> bool:
+	fire_rate_change += amount
+	fire_rate_changed.emit(fire_rate_change)
+	return true
+
+func swap_weapon():
+	match weapon_system.equipped_weapon:
+		weapon_system.RIFLE:
+			weapon_system.equipped_weapon = weapon_system.BASIC_PISTOL
+		weapon_system.BASIC_PISTOL:
+			weapon_system.equipped_weapon = weapon_system.RIFLE
+	

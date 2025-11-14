@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://b4g1f0d1f3ysy"]
+
+[ext_resource type="SpriteFrames" uid="uid://vb5a3rr6m1hr" path="res://resources/animations/red_slime_frames.tres" id="1_6bfv0"]
+[ext_resource type="Script" uid="uid://bxtjti5hlu2op" path="res://scripts/resources/enemy_resource.gd" id="2_k6kks"]
+
+[resource]
+script = ExtResource("2_k6kks")
+enemy_id = "power_slime"
+enemy_name = "Power Slime"
+animated_frames = ExtResource("1_6bfv0")
+sprite_scale = 3.0
+max_health = 80.0
+contact_damage = 15.0
+move_speed = 50.0
+detection_range = 800.0
+xp_value = 15
+unlock_wave = 2
+spawn_weight = 5
+credit_cost = 20

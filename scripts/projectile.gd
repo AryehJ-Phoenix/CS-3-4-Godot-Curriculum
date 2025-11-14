@@ -147,7 +147,6 @@ func setup(projectile_config: ProjectileResource) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	# Check if we hit an enemy
 	if body.has_method("take_damage"):
-		print("HIT BODY")
 		body.take_damage(damage)
 		_handle_hit()
 
@@ -156,7 +155,6 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	# Check if we hit an enemy (some enemies might be Area2D)
 	if area.has_method("take_damage"):
-		print("HIT AREA")
 		area.take_damage(damage)
 		_handle_hit()
 

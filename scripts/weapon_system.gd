@@ -59,6 +59,10 @@ class_name WeaponSystem
 @onready var weapon_sprite: Sprite2D = $WeaponSprite
 @onready var fire_point: Marker2D = $FirePoint
 
+const BASIC_PISTOL = preload("uid://c7qxm2v8pqb3h")
+const RIFLE = preload("uid://ccph5jdsw51fx")
+
+
 var fire_cooldown: float = 0.0
 var nearest_enemy: Node2D = null
 @onready var player: Player = %Player
@@ -141,9 +145,9 @@ func _fire_weapon(direction: Vector2) -> bool:
 		projectile_instance.direction = final_direction
 		projectile_instance.global_position = fire_point.global_position
 		projectile_instance.piercing = player.piercing
-		projectile_instance.max_pierces = player.piercing_level
+		projectile_instance.max_pierces = equipped_weapon.projectile_config.max_pierces + player.piercing_level
 		@warning_ignore("narrowing_conversion")
-		projectile_instance.damage = randi_range(player.min_damage,player.max_damage)
+		projectile_instance.damage = equipped_weapon.base_damage + randi_range(player.min_damage,player.max_damage)
 
 		# Pass projectile resource to projectile
 		if equipped_weapon.projectile_config:
@@ -157,7 +161,7 @@ func _fire_weapon(direction: Vector2) -> bool:
 		get_tree().root.add_child(projectile_instance)
 
 	# Reset cooldown
-	fire_cooldown = equipped_weapon.get_fire_cooldown()
+	fire_cooldown = equipped_weapon.get_fire_cooldown() - player.fire_rate_change
 	return true
 
 

@@ -82,6 +82,7 @@ enum UpgradeType {
 	DAMAGE_GAMBLE,## Increases max_damage var and decreases min_damage var
 	PIERCING,  ## Increases enemy piercing
 	XP_MULT,   ## Increases xp multiplier
+	FIRE_RATE, ## Increases base fire rate
 }
 
 @export_group("Upgrade Identity")
@@ -124,6 +125,8 @@ func apply_to_player(player: Player) -> bool:
 			return player.upgrade_piercing(amount)
 		UpgradeType.XP_MULT:
 			return player.upgrade_xp_multiplier(amount)
+		UpgradeType.FIRE_RATE:
+			return player.upgrade_fire_rate(amount)
 		_:
 			push_error("Unknown stat_type: " + str(stat_type))
 			return false
