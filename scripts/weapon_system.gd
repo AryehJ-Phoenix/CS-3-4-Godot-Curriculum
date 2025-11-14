@@ -140,7 +140,9 @@ func _fire_weapon(direction: Vector2) -> bool:
 		# Setup projectile
 		projectile_instance.direction = final_direction
 		projectile_instance.global_position = fire_point.global_position
-		
+		projectile_instance.piercing = player.piercing
+		projectile_instance.max_pierces = player.piercing_level
+		@warning_ignore("narrowing_conversion")
 		projectile_instance.damage = randi_range(player.min_damage,player.max_damage)
 
 		# Pass projectile resource to projectile

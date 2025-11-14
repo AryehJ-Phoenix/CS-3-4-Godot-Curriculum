@@ -55,18 +55,26 @@ var facing: Vector2 = Vector2.ZERO
 # Health System
 @export var max_health: float = 100.0
 var current_health: float = 100.0
-var min_damage: int = 10
-var max_damage: int = 10
+
+#Attack System
+var min_damage: float = 10
+var max_damage: float = 10
+var piercing: bool = false
+var piercing_level: int = 1
 
 # Level and Experience
 var level: int = 1
 var current_xp: float = 0.0
 var xp_to_next_level: float = 100.0
+var xp_multiplier: float = 1.0
 
 
 # Signals for UI updates
 signal health_changed(new_health: float, max_health: float)
 signal speed_changed(new_speed: float, max_speed: float)
+signal damage_changed(new_min_damage: float, new_max_damage: float)
+signal piercing_changed(new_piercing_level: int)
+signal xp_multiplier_changed(new_xp_multiplier: float)
 signal xp_changed(current_xp: float, xp_needed: float)
 signal level_up(new_level: int)
 signal player_died
@@ -153,7 +161,7 @@ func heal(amount: float) -> bool:
 ## Gain experience points
 ## Returns true if this XP gain caused a level up
 func gain_experience(amount: float) -> bool:
-	current_xp += amount
+	current_xp += amount * xp_multiplier
 	xp_changed.emit(current_xp, xp_to_next_level)
 
 	# Check if leveled up
@@ -223,4 +231,24 @@ func upgrade_health(amount: float) -> bool:
 func upgrade_speed(amount: float) -> bool:
 	move_speed += amount
 	speed_changed.emit(move_speed)
+	return true
+
+func upgrade_damage(min_change: float, max_change: float):
+	min_damage += min_change
+	max_damage += max_change
+	if max_damage < min_damage:
+		max_damage = min_damage
+	damage_changed.emit(min_damage,max_damage)
+	return true
+
+func upgrade_piercing(amount: float) -> bool:
+	@warning_ignore("narrowing_conversion")
+	piercing_level += amount
+	piercing = true
+	piercing_changed.emit(piercing_level)
+	return true
+
+func upgrade_xp_multiplier(amount: float) -> bool:
+	xp_multiplier += amount
+	xp_multiplier_changed.emit(xp_multiplier_changed)
 	return true

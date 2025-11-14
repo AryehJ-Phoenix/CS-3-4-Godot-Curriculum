@@ -118,8 +118,6 @@ func setup(projectile_config: ProjectileResource) -> void:
 
 	speed = projectile_config.speed
 	lifetime = projectile_config.lifetime
-	piercing = projectile_config.piercing
-	max_pierces = projectile_config.max_pierces
 
 	# Setup visual
 	var sprite = get_node_or_null("Sprite2D")
@@ -149,6 +147,7 @@ func setup(projectile_config: ProjectileResource) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	# Check if we hit an enemy
 	if body.has_method("take_damage"):
+		print("HIT BODY")
 		body.take_damage(damage)
 		_handle_hit()
 
@@ -157,6 +156,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	# Check if we hit an enemy (some enemies might be Area2D)
 	if area.has_method("take_damage"):
+		print("HIT AREA")
 		area.take_damage(damage)
 		_handle_hit()
 

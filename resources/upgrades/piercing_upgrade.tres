@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatUpgradeResource" load_steps=2 format=3 uid="uid://b7dnscxnw0htb"]
+
+[ext_resource type="Script" uid="uid://b27lwx066vj4h" path="res://scripts/resources/stat_upgrade_resource.gd" id="1_4lc4v"]
+
+[resource]
+script = ExtResource("1_4lc4v")
+upgrade_id = "piercing_boost"
+upgrade_name = "Piercing +1"
+description = "Increases the number of enemies projectiles can pierce by 1."
+stat_type = 4
+amount = 1.0
+metadata/_custom_type_script = "uid://b27lwx066vj4h"

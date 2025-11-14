@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxvnak5nqpr8a"]
+[gd_scene load_steps=18 format=3 uid="uid://cxvnak5nqpr8a"]
 
 [ext_resource type="Script" uid="uid://bnk74kv0ariww" path="res://scripts/game_world.gd" id="1_game_world"]
 [ext_resource type="TileSet" uid="uid://wio17aw1fnr2" path="res://tilesets/dungeon.tres" id="2_tileset"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" uid="uid://b27lwx066vj4h" path="res://scripts/resources/stat_upgrade_resource.gd" id="10_k1k1x"]
 [ext_resource type="Resource" uid="uid://cq8xm2v8pqb3h" path="res://resources/upgrades/health_upgrade.tres" id="11_ajq0i"]
 [ext_resource type="Resource" uid="uid://dndpj2tass0gi" path="res://resources/upgrades/speed_upgrade.tres" id="13_8vbsj"]
+[ext_resource type="Resource" uid="uid://bfn2x571661nu" path="res://resources/upgrades/damage.tres" id="14_ixwup"]
+[ext_resource type="Resource" uid="uid://bawrgr1u2l3eo" path="res://resources/upgrades/damage_gamble_upgrade.tres" id="15_a43o1"]
+[ext_resource type="Resource" uid="uid://b7dnscxnw0htb" path="res://resources/upgrades/piercing_upgrade.tres" id="16_a43o1"]
+[ext_resource type="Resource" uid="uid://dm04h8pt0nm5a" path="res://resources/upgrades/xp_multiplier_upgrade.tres" id="17_ow1aj"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_game_world")
@@ -34,4 +38,4 @@ available_enemies = Array[ExtResource("7_ixwup")]([ExtResource("8_a43o1")])
 [node name="HUD" parent="." instance=ExtResource("5_hud")]
 
 [node name="LevelUpUI" parent="." instance=ExtResource("6_levelup")]
-available_upgrades = Array[ExtResource("10_k1k1x")]([ExtResource("11_ajq0i"), ExtResource("13_8vbsj")])
+available_upgrades = Array[ExtResource("10_k1k1x")]([ExtResource("11_ajq0i"), ExtResource("13_8vbsj"), ExtResource("14_ixwup"), ExtResource("15_a43o1"), ExtResource("16_a43o1"), ExtResource("17_ow1aj")])
