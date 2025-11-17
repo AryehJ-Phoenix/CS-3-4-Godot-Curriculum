@@ -49,6 +49,9 @@ class_name ProjectileWeaponResource
 ## Angle spread between projectiles when multiple are fired
 @export var spread_angle: float = 15.0
 
+@export_group("Aiming Configuration")
+## How the weapon aims
+@export var manual_aim: bool = false
 
 ## This gets called when the weapon fires
 ## It will instantiate projectiles in the game world

@@ -7,9 +7,10 @@
 [resource]
 script = ExtResource("3_0lkds")
 projectile_config = ExtResource("2_b0yaa")
+manual_aim = true
 item_id = "basic_rifle"
 item_name = "Basic Rifle"
-description = "A stronger slower hunting rifle. Perfect fr gathering food or disposing of foes."
+description = "A stronger, slower hunting rifle that shoots right where you aim. Perfect fr gathering food or disposing of foes."
 icon = ExtResource("1_cme0y")
 value = 50
 base_damage = 30.0

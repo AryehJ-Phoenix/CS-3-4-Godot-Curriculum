@@ -81,20 +81,23 @@ func _process(delta: float) -> void:
 	# Find nearest enemy
 	nearest_enemy = _find_nearest_enemy()
 
+	var direction_to_enemy: Vector2
 	# Rotate to face nearest enemy
-	if nearest_enemy:
-		var direction_to_enemy = (nearest_enemy.global_position - global_position).normalized()
-		rotation = direction_to_enemy.angle()
-
-		# Flip sprite if aiming left
-		if direction_to_enemy.x < 0:
-			weapon_sprite.flip_v = true
-		else:
-			weapon_sprite.flip_v = false
+	if nearest_enemy and !equipped_weapon.manual_aim:
+		direction_to_enemy = (nearest_enemy.global_position - global_position).normalized()
+	if equipped_weapon.manual_aim:
+		direction_to_enemy = (get_global_mouse_position() - global_position).normalized()
+	rotation = direction_to_enemy.angle()
+			
+			# Flip sprite if aiming left
+	if direction_to_enemy.x < 0:
+		weapon_sprite.flip_v = true
+	else:
+		weapon_sprite.flip_v = false
 
 		# Auto-fire if cooldown is ready
-		if fire_cooldown <= 0 and equipped_weapon:
-			_fire_weapon(direction_to_enemy)
+	if fire_cooldown <= 0 and equipped_weapon:
+		_fire_weapon(direction_to_enemy)
 
 
 ## Find the closest enemy to the player
@@ -144,7 +147,8 @@ func _fire_weapon(direction: Vector2) -> bool:
 		# Setup projectile
 		projectile_instance.direction = final_direction
 		projectile_instance.global_position = fire_point.global_position
-		projectile_instance.piercing = player.piercing
+		if equipped_weapon.projectile_config.piercing or player.piercing:
+			projectile_instance.piercing = true
 		projectile_instance.max_pierces = equipped_weapon.projectile_config.max_pierces + player.piercing_level
 		@warning_ignore("narrowing_conversion")
 		projectile_instance.damage = equipped_weapon.base_damage + randi_range(player.min_damage,player.max_damage)

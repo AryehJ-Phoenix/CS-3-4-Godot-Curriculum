@@ -273,4 +273,7 @@ func swap_weapon():
 			weapon_system.equipped_weapon = weapon_system.BASIC_PISTOL
 		weapon_system.BASIC_PISTOL:
 			weapon_system.equipped_weapon = weapon_system.RIFLE
+		_:
+			pass
+	
 	
