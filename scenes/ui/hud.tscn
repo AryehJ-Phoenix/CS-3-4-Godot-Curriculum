@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8wk4n6mqpr3m"]
+[gd_scene load_steps=3 format=3 uid="uid://c8wk4n6mqpr3m"]
 
-[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://spj03ofeblpa" path="res://scripts/ui/hud.gd" id="1_hud"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0mwgc"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -22,13 +24,16 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.1254902, 0.1254902, 1)
 custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
-max_value = 100.0
 value = 100.0
 show_percentage = false
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HealthBar"]
+modulate = Color(0, 0, 1, 1)
+z_index = 1
+material = SubResource("CanvasItemMaterial_0mwgc")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,9 +49,9 @@ grow_vertical = 2
 text = "Health: 100/100"
 
 [node name="XPBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+modulate = Color(9.770542e-06, 0.71405935, 0.12947747, 1)
 custom_minimum_size = Vector2(300, 25)
 layout_mode = 2
-max_value = 100.0
 show_percentage = false
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/XPBar"]
